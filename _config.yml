@@ -1,0 +1,14 @@
+title: Kendall &amp; Kendall
+email: hello@kendallshq.com
+description: A development studio located in Maryland founded in 2015 by the Kendall brothers.
+baseurl: ""
+url: "http://kendallshq.com"
+twitter_username: kendallshq
+
+# Build settings
+markdown: kramdown
+source: source
+destination: public
+sass:
+  sass_dir: _scss
+  style: compressed
