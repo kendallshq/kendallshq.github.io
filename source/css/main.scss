@@ -73,8 +73,8 @@
 }
 
 #team {
-  background: $dark-gray url('../images/team.jpg') no-repeat bottom left;
-  padding: rem-calc(100) rem-calc(40) rem-calc(100) rem-calc(40);
+  background: $dark-gray url('../images/team.jpg') no-repeat bottom center;
+  padding: rem-calc(100) rem-calc(40) rem-calc(100) rem-calc(40)!important;
 }
 
 .button.hollow.white {
