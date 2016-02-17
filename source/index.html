@@ -38,7 +38,7 @@ layout: default
 
   {% for member in site.data.team %}
   <div class="column small-12 medium-3">
-    <img class="profile" src="/images/{{ member.name | split: ' ' | first }}.jpg" alt="">
+    <img class="profile" src="/images/{{ member.name | split: ' ' | first | downcase }}.jpg" alt="">
     <small>{{ member.job }}</small>
     <h4>{{ member.name }}</h4>
     <p>{{ member.bio }}</p>
