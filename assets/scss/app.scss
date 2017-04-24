@@ -1,0 +1,197 @@
+$khq-debug: 0; // Controls classes in config/_utils.scss - 0 to disable.
+
+@import 'http://fonts.googleapis.com/css?family=Roboto:400,700|Montserrat:700';
+@import 'config/colors';
+@import 'config/images';
+@import 'frameworks/foundation';
+@import 'config/utils';
+@import 'khq-font';
+
+body {
+  background: $green;
+}
+
+hr {
+  width: 3.6rem;
+  border-bottom-width: 4px;
+  border-color: $blue;
+  margin-top: 0!important;
+  margin-left: 0!important;
+  margin-right: 0!important;
+}
+
+/**
+ * 1. Layout
+ * ---------------------
+ * Extends column sizes and push/pull
+ * classes to define custom classes for
+ * cleaner HTML and reusuability.
+ */
+.container {
+  @extend .row;
+  @extend .expanded;
+  @extend .collapse;
+}
+
+.intro {
+  &__photo {
+    @extend .column;
+    @extend .small-24;
+    @extend .medium-12;
+    @extend .large-16;
+    @extend .medium-push-12;
+    @extend .large-push-8;
+  }
+
+  &__content {
+    @extend .column;
+    @extend .small-24;
+    @extend .medium-12;
+    @extend .large-8;
+    @extend .medium-pull-12;
+    @extend .large-pull-16;
+  }
+}
+
+.standard {
+  &__photo {
+    @extend .column;
+    @extend .small-24;
+    @extend .medium-10;
+    @extend .large-14;
+  }
+
+  &__content {
+    @extend .column;
+    @extend .small-24;
+    @extend .medium-14;
+    @extend .large-10;
+  }
+}
+
+.alternate {
+  &__photo {
+    @extend .column;
+    @extend .small-24;
+    @extend .medium-10;
+    @extend .large-14;
+    @extend .medium-push-14;
+    @extend .large-push-10;
+  }
+
+  &__content {
+    @extend .column;
+    @extend .small-24;
+    @extend .medium-14;
+    @extend .large-10;
+    @extend .medium-pull-10;
+    @extend .large-pull-14;
+  }
+}
+
+/**
+ * 2. Logo
+ * ---------------------
+ * Uses the custom KendallHQ font to
+ * render our logo.
+ */
+h1 {
+  &.logotype {
+    margin-bottom: 2rem;
+    font-size: 1rem;
+
+    i.icon {
+      display: inline-block;
+      color: $darkest-gray;
+      padding: 1rem;
+      background: $white;
+
+      &--alt {
+        color: $white;
+        background: $darkest-gray;
+      }
+
+      &--bordered {
+        border: 4px solid $darkest-gray;
+      }
+    }
+
+    span {
+      display: none;
+    }
+  }
+}
+
+/**
+ * 3. Block
+ * ---------------------
+ * Create blocks for display content on
+ * solid background colors with padding,
+ * borders, or photos.
+ */
+.block {
+  padding: 2rem;
+
+  @each $key, $value in $khq-palette {
+    &--border {
+      border-top: 10px solid $light-gray;
+
+      &--#{$key} {
+        border-top: 10px solid map-get($khq-palette, $key);
+      }
+    }
+
+    &--solid {
+      &--#{$key} {
+        background: map-get($khq-palette, $key);
+        @if color-contrast(map-get($khq-palette, $key), $darkest-gray) < 10 {
+          color: $white;
+        }
+      }
+    }
+
+    &--transparent {
+      &--#{$key} {
+        background: rgba(map-get($khq-palette, $key), 0.2);
+        @if color-contrast(rgba(map-get($khq-palette, $key), 0.2), $darkest-gray) < 10 {
+          color: $white;
+        }
+      }
+    }
+
+    &--photo {
+      height: 100%;
+      background: transparent top left no-repeat;
+      background-size: cover;
+
+      &--mobile {
+        @media screen and (max-width: 39.9375em) {
+          height: 200px;
+        }
+      }
+
+      @each $key in $khq-images {
+        &--#{$key} {
+          background-image: url('images/#{$key}.jpg');
+        }
+      }
+    }
+  }
+}
+
+/**
+ * 4. Typography
+ * ---------------------
+ * Defines all typography styles.
+ */
+p.lead a {
+  font-weight: bold;
+}
+
+p.copyright {
+  border-top: 10px solid $light-gray;
+  padding: 1rem 0;
+  color: $medium-gray;
+  text-transform: uppercase;
+  font-size: .8rem;
+}

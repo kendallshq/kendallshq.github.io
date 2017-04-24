@@ -1,0 +1,55 @@
+/**
+ * Foundation for Sites by ZURB
+ * Version 6.3.1
+ * foundation.zurb.com
+ * Licensed under MIT Open Source
+ */
+
+// Dependencies
+@import '_vendor/normalize-scss/sass/normalize';
+@import '_vendor/sassy-lists/stylesheets/helpers/missing-dependencies';
+@import '_vendor/sassy-lists/stylesheets/helpers/true';
+@import '_vendor/sassy-lists/stylesheets/functions/purge';
+@import '_vendor/sassy-lists/stylesheets/functions/remove';
+@import '_vendor/sassy-lists/stylesheets/functions/replace';
+@import '_vendor/sassy-lists/stylesheets/functions/to-list';
+
+// Settings
+// import your own `settings` here or
+// import and modify the default settings through
+@import '../config/colors';
+@import '../config/foundation';
+
+// Sass utilities
+@import 'scss/util/util';
+
+// Global variables and styles
+@import 'scss/global';
+
+// Components
+@import 'scss/grid/grid';
+@import 'scss/typography/typography';
+@import 'scss/forms/forms';
+@import 'scss/components/visibility';
+@import 'scss/components/float';
+@import 'scss/components/button';
+@import 'scss/components/dropdown';
+@import 'scss/components/label';
+@import 'scss/components/menu';
+@import 'scss/components/menu-icon';
+@import 'scss/components/title-bar';
+@import 'scss/components/top-bar';
+
+@include foundation-global-styles;
+@include foundation-grid;
+@include foundation-typography;
+@include foundation-forms;
+@include foundation-button;
+@include foundation-menu;
+@include foundation-menu-icon;
+@include foundation-dropdown;
+@include foundation-label;
+@include foundation-title-bar;
+@include foundation-top-bar;
+@include foundation-visibility-classes;
+@include foundation-float-classes;

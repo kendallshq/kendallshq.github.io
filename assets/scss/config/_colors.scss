@@ -1,0 +1,41 @@
+// Generic Colors
+// ---------------------
+$white: #fff;
+$black: #101010;
+$darkest-gray: #2E3234;
+$dark-gray: #333;
+$medium-gray: #999;
+$light-gray: #eef1f2;
+
+
+// Brand Colors
+// ---------------------
+$blue: #3686be;
+$green: #31975a;
+$red: #e45635;
+$yellow: #f6f4c2;
+
+$khq-palette: (
+  blue: $blue,
+  green: $green,
+  red: $red,
+  yellow: $yellow,
+  white: $white,
+  dark-gray: $dark-gray,
+  darkest-gray: $darkest-gray,
+);
+
+// Palette
+// ---------------------
+$khq-zurb-palette: (
+  // Foundation Assignment
+  // ---------------------
+  primary: $blue,
+  secondary: $light-gray,
+  success: $green,
+  warning: $red,
+  alert: $yellow,
+
+  // Custom Assignment
+  // ---------------------
+);
