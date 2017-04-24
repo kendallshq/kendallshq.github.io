@@ -172,7 +172,7 @@ h1 {
 
       @each $key in $khq-images {
         &--#{$key} {
-          background-image: url('images/#{$key}.jpg');
+          background-image: url('//media.kendallshq.com/web-assets/images/#{$key}.jpg');
         }
       }
     }

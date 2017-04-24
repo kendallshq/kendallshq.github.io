@@ -96,8 +96,12 @@ gulp.task('default', ['watch']);
 // -----------------------------------------
 // 6. Deploy
 // -----------------------------------------
-gulp.task('deploy', function(cb){
+gulp.task('cname', function(cb){
   fs.writeFile('public/CNAME', 'kendallshq.com', cb);
+});
+
+gulp.task('deploy', function(){
+  return gulp.src('.').pipe(exec('rm -Rf public/assets'));
 });
 
 
