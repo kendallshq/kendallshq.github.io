@@ -8,7 +8,8 @@ var gulp      = require('gulp'),
     plumber   = require('gulp-plumber'),
     sass      = require('gulp-sass'),
     uglify    = require('gulp-uglify'),
-    watch     = require('gulp-watch');
+    watch     = require('gulp-watch'),
+    fs        = require('fs');
 
 
 // -----------------------------------------
@@ -91,8 +92,17 @@ gulp.task('all', [
 
 gulp.task('default', ['watch']);
 
+
 // -----------------------------------------
-// 6. Watch
+// 6. Deploy
+// -----------------------------------------
+gulp.task('deploy', function(cb){
+  fs.writeFile('public/CNAME', 'kendallshq.com', cb);
+});
+
+
+// -----------------------------------------
+// 7. Watch
 // -----------------------------------------
 gulp.task('watch', function(){
   gulp.watch([
