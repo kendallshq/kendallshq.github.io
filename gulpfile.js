@@ -92,12 +92,12 @@ var deploy = function() {
 // -----------------------------------------
 // 6. Watch
 // -----------------------------------------
-gulp.task('watch', function(){
+var watch = function(){
   gulp.watch(['assets/scss/**/*.scss'], styles);
   gulp.watch(['assets/js/*.js'], scripts);
   gulp.watch(['assets/images/*.*'], gulp.parallel(images, styles));
   gulp.watch(['pages/index.html'], index);
-});
+}
 
 
 // -----------------------------------------
