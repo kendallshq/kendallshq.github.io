@@ -6,7 +6,7 @@
   "version": "0.0.1",
   "devDependencies": {
     "foundation-sites": "^6.3.1",
-    "gulp": "^3.9.1",
+    "gulp": "gulpjs/gulp#4.0",
     "gulp-concat": "^2.6.1",
     "gulp-csso": "^3.0.0",
     "gulp-exec": "^2.1.3",

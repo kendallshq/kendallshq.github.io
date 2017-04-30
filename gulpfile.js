@@ -15,29 +15,28 @@ var gulp      = require('gulp'),
 // -----------------------------------------
 // 2. Clean Public Directory
 // -----------------------------------------
-gulp.task('clean', function() {
-  return gulp.src('.')
-  .pipe(exec('rm -Rf public'));
-});
+var clean = function(){
+  return gulp.src('.').pipe(exec('rm -Rf public'));
+}
 
 
 // -----------------------------------------
-// 4. Assets
+// 3. Pages
 // -----------------------------------------
-function _(file) {
+var page = function(file){
   return gulp.src('pages/' + file + '.html')
   .pipe(gulp.dest('public/'));
 }
 
-gulp.task('page.index', function(){
-  return _('index');
-});
+var index = function(){
+  return page('index');
+}
 
 
 // -----------------------------------------
 // 4. Assets
 // -----------------------------------------
-gulp.task('assets.css', function(){
+var styles = function() {
   return gulp.src('assets/scss/app.scss')
     .pipe(plumber())
     .pipe(sass({
@@ -47,9 +46,9 @@ gulp.task('assets.css', function(){
     }))
     .pipe(csso())
     .pipe(gulp.dest('public/assets/'));
-});
+}
 
-gulp.task('assets.js', function(){
+var scripts = function() {
   return gulp.src([
     'node_modules/foundation-sites/vendor/jquery/dist/jquery.min.js',
     'node_modules/foundation-sites/dist/js/foundation.min.js',
@@ -57,63 +56,64 @@ gulp.task('assets.js', function(){
   .pipe(concat('app.js'))
   .pipe(uglify())
   .pipe(gulp.dest('public/assets/'));
-});
+}
 
-gulp.task('assets.images', function(){
+var images = function() {
   return gulp.src('assets/images/*.*')
   .pipe(gulp.dest('public/assets/images/'));
-});
+}
 
-gulp.task('assets.fonts', function(){
+var fonts = function() {
   return gulp.src('assets/fonts/*.*')
   .pipe(gulp.dest('public/assets/fonts/'));
-});
+}
+
+var assets = function(){
+  return gulp.parallel(styles, scripts, images, fonts);
+}
 
 
 // -----------------------------------------
-// 5. Combine Tasks
+// 5. Deploy
 // -----------------------------------------
-gulp.task('assets', [
-  'assets.css',
-  'assets.js',
-  'assets.images',
-  'assets.fonts'
-]);
+var cname = function(cb) {
+  return fs.writeFile('public/CNAME', 'kendallshq.com', cb);
+}
 
-gulp.task('pages', [
-  'page.index'
-]);
-
-gulp.task('all', [
-  'clean',
-  'assets',
-  'pages'
-]);
-
-gulp.task('default', ['watch']);
-
-
-// -----------------------------------------
-// 6. Deploy
-// -----------------------------------------
-gulp.task('cname', function(cb){
-  fs.writeFile('public/CNAME', 'kendallshq.com', cb);
-});
-
-gulp.task('deploy', function(){
+var cleanAssets = function() {
   return gulp.src('.').pipe(exec('rm -Rf public/assets'));
-});
+}
+
+var deploy = function() {
+  return gulp.series(cname, cleanAssets);
+}
 
 
 // -----------------------------------------
-// 7. Watch
+// 6. Watch
 // -----------------------------------------
 gulp.task('watch', function(){
-  gulp.watch([
-    'assets/scss/*.scss',
-    'assets/scss/config/*.scss'
-  ], ['assets.css']);
-  gulp.watch(['assets/js/*.js'], ['assets.js']);
-  gulp.watch(['assets/images/*.*'], ['assets.images', 'assets.css']);
-  gulp.watch(['pages/**/*.html'], ['pages']);
+  gulp.watch(['assets/scss/**/*.scss'], styles);
+  gulp.watch(['assets/js/*.js'], scripts);
+  gulp.watch(['assets/images/*.*'], gulp.parallel(images, styles));
+  gulp.watch(['pages/index.html'], index);
 });
+
+
+// -----------------------------------------
+// 7. Combine Tasks
+// -----------------------------------------
+var test = function() {
+  return gulp.parallel(clean, assets(), index);
+}
+
+var commit = function() {
+  return gulp.series(test(), deploy(), index);
+}
+
+gulp.task('assets',       assets());
+gulp.task('pages.index',  index);
+gulp.task('deploy',       deploy());
+gulp.task('commit',       commit());
+gulp.task('test',         test());
+gulp.task('default',      watch);
